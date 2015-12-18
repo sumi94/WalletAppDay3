@@ -4,39 +4,46 @@ import static org.junit.Assert.assertEquals;
 
 public class AccountTest {
     @Test
-    public void theWalletAmountShouldBeZeroInitially() throws Exception {
-        Account account = new Account();
+    public void theAccountAmountShouldBeZeroInitially() {
+        Account account = new Account(0);
         assertEquals("0.0", account.toString());
     }
 
+
+
     @Test
-    public void shouldAddTenRupeesToTotalOnAddingTenRupees(){
-        Account account =new Account();
+    public void shouldAddTenRupeesToTotalOnAddingTenRupees() {
+        Account account =new Account(0);
         account.addMoney(10d);
         assertEquals("10.0", account.toString());
     }
 
     @Test
-    public void shouldNotAddNegativeAmountToWallet() throws Exception {
-        Account account = new Account();
+    public void shouldNotAddNegativeAmountToAccount() {
+        Account account = new Account(0);
         account.addMoney(-10d);
         assertEquals("0.0", account.toString());
 
     }
 
     @Test
-    public void shouldBeAbleToWithdrawTwentyFromWallet() throws Exception {
-        Account account =new Account();
-        account.addMoney(20d);
-        account.getMoney(20d);
+    public void shouldBeAbleToWithdrawTwentyFromAccount() {
+        Account account =new Account(20);
+        account.getMoney(20);
         assertEquals("0.0", account.toString());
     }
 
     @Test
     public void shouldNotBeAleToWithdrawNegativeMoney() {
-        Account account = new Account();
-        account.getMoney(-1d);
+        Account account = new Account(0);
+        account.getMoney(-10d);
         assertEquals("0.0", account.toString());
     }
 
+    @Test
+    public void shouldBeAbleToWithdrawTenOnZeroBalance() {
+        Account account = new Account(0);
+        account.getMoney(10d);
+        assertEquals("-10.0", account.toString());
+    }
 }
